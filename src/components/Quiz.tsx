@@ -23,6 +23,7 @@ export default function Quiz() {
 
     return (
         <>
+            <h1>{error}</h1>
             <pre style={{whiteSpace: 'wrap', fontSize: 16}}>{JSON.stringify(questions)}</pre>
         </>
     )
