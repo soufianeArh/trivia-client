@@ -13,11 +13,11 @@ export default function Quiz() {
 
         superagent.get("http://localhost:3000/api/questions")
             .set('accept', 'json')
+            .catch((err: any) => setError(true))
             .then((res) => {
                 console.log(res)
                 setQuestions(res.body);
             })
-            .catch((err: any) => setError(true));
     })
 
 
