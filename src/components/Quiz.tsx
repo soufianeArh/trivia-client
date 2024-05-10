@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import superagent from "superagent";
+// import superagent from "superagent";
 
 export default function Quiz() {
     const [isLoading, setIsLoading] = useState(false);
@@ -7,10 +7,14 @@ export default function Quiz() {
     const [error, setError] = useState(false);
     const [questions, setQuestions] = useState([]);
 
+
+
     useEffect(() => {
         if (isLoading) return;
         setIsLoading(true);
-
+        setError(false);
+        setQuestions([]);
+/*
         superagent.get("http://localhost:3000/api/questions")
             .set('accept', 'json')
             .catch((err: any) => setError(true))
@@ -18,6 +22,8 @@ export default function Quiz() {
                 console.log(res)
                 setQuestions(res.body);
             })
+
+ */
     })
 
 
