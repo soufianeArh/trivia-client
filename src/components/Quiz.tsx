@@ -17,7 +17,7 @@ export default function Quiz() {
                 console.log(res)
                 setQuestions(res.body);
             })
-            .catch((err: any) => setError(err));
+            .catch((err: any) => setError(true));
     })
 
 
