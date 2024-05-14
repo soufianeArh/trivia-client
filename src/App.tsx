@@ -1,37 +1,42 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Quiz from "./components/Quiz.tsx";
+import Container from "react-bootstrap/Container";
+
+import Quiz from "./components/Quiz/Quiz.tsx";
+import Start from "./components/Start.tsx";
+import Highscore from "./components/Highscore/Highscore.tsx";
+
+import './App.scss'
+
+enum CurrentAppView {
+    START,
+    QUIZ,
+    HIGHSCORE
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [currentAppView, setCurrentAppView] = useState<CurrentAppView>(CurrentAppView.START)
 
-  return (
-    <>
-        <Quiz></Quiz>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    function showHighscore() {
+        setCurrentAppView(CurrentAppView.HIGHSCORE)
+    }
+
+    return (
+        <>
+            <Container>
+                {currentAppView === CurrentAppView.START ?
+                    <Start
+                        onStart={() => setCurrentAppView(CurrentAppView.QUIZ)}
+                        onHighscore={() => showHighscore()}
+                    /> : null}
+
+                {currentAppView === CurrentAppView.QUIZ ?
+                    <Quiz onNavigateToHighscore={() => showHighscore()} /> : null}
+
+                {currentAppView === CurrentAppView.HIGHSCORE ?
+                    <Highscore onBack={() => setCurrentAppView(CurrentAppView.START)} /> : null}
+            </Container>
+        </>
+    )
 }
 
 export default App
